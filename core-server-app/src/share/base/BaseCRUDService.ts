@@ -1,36 +1,48 @@
 import { NotFoundException } from '@nestjs/common';
-import { buildFindOptions } from 'share/lib';
-import { DeepPartial, FindManyOptions, Repository } from 'typeorm';
+import {
+  DeepPartial,
+  FindManyOptions,
+  FindOptionsWhere,
+  Repository,
+} from 'typeorm';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { BaseEntity } from './BaseEntity';
 
-export abstract class BaseCRUDService<T> {
-	constructor(protected readonly repository: Repository<T>) {}
+export abstract class BaseCRUDService<
+  Entity extends BaseEntity,
+  PartialEntity extends DeepPartial<Entity>,
+  QueryEntity extends QueryDeepPartialEntity<Entity>,
+> {
+  constructor(protected readonly repository: Repository<Entity>) {}
 
-	async findAll(query?: any): Promise<T[]> {
-		const options: FindManyOptions<T> = buildFindOptions<T>(query || {});
-		return this.repository.find(options);
-	}
+  async findAll(query?: FindManyOptions<Entity>) {
+    return this.repository.find(query);
+  }
 
-	async findOne(id: string): Promise<T> {
-		const entity = await this.repository.findOne({ where: { id } } as any);
-		if (!entity) {
-			throw new NotFoundException(`Entity with id ${id} not found`);
-		}
-		return entity;
-	}
+  async findOne(id: string) {
+    return this.repository.findOne({
+      where: { id } as FindOptionsWhere<Entity>,
+    });
+  }
 
-	async create(data: DeepPartial<T>): Promise<T> {
-		return this.repository.save(data);
-	}
+  async create(dto: PartialEntity) {
+    return this.repository.save(dto);
+  }
 
-	async update(id: string, data: QueryDeepPartialEntity<T>): Promise<T> {
-		await this.findOne(id);
-		await this.repository.update(id, data);
-		return this.findOne(id);
-	}
+  async update(id: string, dto: QueryEntity) {
+    const entity = await this.findOne(id);
+    if (!entity) {
+      throw new NotFoundException(`Entity with id ${id} not found`);
+    }
+    await this.repository.update(id, dto);
+    return this.findOne(id);
+  }
 
-	async remove(id: string): Promise<void> {
-		await this.findOne(id);
-		await this.repository.delete(id);
-	}
+  async remove(id: string) {
+    const entity = await this.findOne(id);
+    if (!entity) {
+      throw new NotFoundException(`Entity with id ${id} not found`);
+    }
+    await this.repository.delete(id);
+  }
 }

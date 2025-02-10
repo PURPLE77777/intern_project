@@ -1,3 +1,3 @@
 export * from './buildFindOptions';
 export * from './createRepositoryProvider';
-export * from './OmitBaseEntityProperties';
+export * from './OmitProperties';

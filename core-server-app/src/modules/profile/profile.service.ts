@@ -1,45 +1,55 @@
 import {
-	BadRequestException,
-	Inject,
-	Injectable,
-	NotFoundException,
+  BadRequestException,
+  Inject,
+  Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { UserService } from 'modules/user/user.service';
 import { BaseCRUDService } from 'share/base';
 import { Repository } from 'typeorm';
 import { ProfileErrorMessages } from './const';
-import { CreateProfileDto } from './dto/createProfile.dto';
+import { CreateProfileDto } from './dto/create-profile.dto';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 import { Profile } from './profile.entity';
 import { PROFILE_REPOSITORY_TOKEN } from './profile.providers';
-import { UserErrorMessages } from 'modules/user/const';
 
 @Injectable()
-export class ProfileService extends BaseCRUDService<Profile> {
-	constructor(
-		@Inject(PROFILE_REPOSITORY_TOKEN)
-		private readonly profileRepository: Repository<Profile>,
-		private readonly userService: UserService
-	) {
-		super(profileRepository);
-	}
+export class ProfileService extends BaseCRUDService<
+  Profile,
+  CreateProfileDto,
+  UpdateProfileDto
+> {
+  constructor(
+    @Inject(PROFILE_REPOSITORY_TOKEN)
+    private readonly profileRepository: Repository<Profile>,
+    private readonly userService: UserService
+  ) {
+    super(profileRepository);
+  }
 
-	async create(dto: CreateProfileDto) {
-		const { userId, username } = dto;
+  async create(dto: CreateProfileDto) {
+    const { userId, username } = dto;
 
-		const user = await this.userService.findOne(userId);
+    await this.userService.findOrError(userId);
 
-		if (!user) {
-			throw new NotFoundException(UserErrorMessages.UserNotFound);
-		}
+    const oldProfile = await this.profileRepository.findOne({
+      where: { username },
+    });
 
-		const oldProfile = await this.profileRepository.findOne({
-			where: { username },
-		});
+    if (oldProfile) {
+      throw new BadRequestException(ProfileErrorMessages.ProfileExists);
+    }
 
-		if (oldProfile) {
-			throw new BadRequestException(ProfileErrorMessages.ProfileExists);
-		}
+    return super.create(dto);
+  }
 
-		return this.profileRepository.save(dto);
-	}
+  async findOrError(id: string, errorMessage?: string) {
+    const profile = await super.findOne(id);
+    if (!profile) {
+      throw new NotFoundException(
+        errorMessage || ProfileErrorMessages.ProfileNotFound
+      );
+    }
+    return profile;
+  }
 }

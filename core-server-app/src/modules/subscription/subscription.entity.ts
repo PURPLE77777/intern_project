@@ -3,19 +3,22 @@ import { Column, Entity } from 'typeorm';
 
 @Entity('subscriptions')
 export class Subscription extends BaseEntity {
-	@Column({
-		type: 'uuid',
-	})
-	subscriberId: string;
+  @Column({
+    name: 'subscriber_id',
+    type: 'uuid',
+  })
+  subscriberId: string;
 
-	@Column({
-		type: 'uuid',
-	})
-	subscriptionId: string;
+  @Column({
+    name: 'subscription_id',
+    type: 'uuid',
+  })
+  subscriptionId: string;
 
-	@Column({
-		type: 'boolean',
-		default: false,
-	})
-	is_accepted: boolean;
+  @Column({
+    name: 'is_accepted',
+    type: 'boolean',
+    default: false,
+  })
+  isAccepted?: boolean;
 }

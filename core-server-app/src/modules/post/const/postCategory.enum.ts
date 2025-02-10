@@ -1,1 +1,5 @@
-export enum PostCategory {}
+export enum PostCategory {
+  Story = 'story',
+  Post = 'post',
+  Reel = 'reel',
+}

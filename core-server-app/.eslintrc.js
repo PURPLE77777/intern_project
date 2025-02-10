@@ -21,15 +21,15 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-		
-		// my
-		'@typescript-eslint/no-empty-object-type': 'off',
-		'@typescript-eslint/no-unused-vars': 'warn',
-		'import/no-internal-modules': 'off',
-		'prettier/prettier': 'off',
-		'import/order': 'off',
-		'no-var': 'warn',
-		'prefer-const': 'warn',
-		'react/no-unstable-nested-components': 'off',
+
+    // my
+    '@typescript-eslint/no-empty-object-type': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'import/no-internal-modules': 'off',
+    'prettier/prettier': 'off',
+    'import/order': 'off',
+    'no-var': 'warn',
+    'prefer-const': 'warn',
+    'react/no-unstable-nested-components': 'off',
   },
 };

@@ -7,9 +7,9 @@ import { userProviders } from './user.providers';
 import { UserService } from './user.service';
 
 @Module({
-	imports: [DatabaseModule, HashModule, forwardRef(() => ProfileModule)],
-	providers: [...userProviders, UserService],
-	controllers: [UserController],
-	exports: [UserService],
+  imports: [DatabaseModule, HashModule, forwardRef(() => ProfileModule)],
+  providers: [...userProviders, UserService],
+  controllers: [UserController],
+  exports: [UserService],
 })
 export class UserModule {}

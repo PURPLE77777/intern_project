@@ -1,2 +1,2 @@
-export * from './userErrorMessages.enum';
+export * from './userErrorMessage.enum';
 export * from './userFields.const';
