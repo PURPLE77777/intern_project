@@ -1,5 +1,5 @@
 import { OmitType } from '@nestjs/mapped-types';
-import { IsOptional, IsString, IsUUID } from 'class-validator';
+import { IsOptional, IsString, IsUUID, MinLength } from 'class-validator';
 import { Comment } from '../comment.entity';
 
 export class CreateCommentDto extends OmitType(Comment, [
@@ -9,6 +9,7 @@ export class CreateCommentDto extends OmitType(Comment, [
   'post',
 ]) {
   @IsString()
+  @MinLength(1)
   text: string;
 
   @IsOptional()

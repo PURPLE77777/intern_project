@@ -8,6 +8,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
 import { IBaseCRUD } from 'share/interfaces';
 import { FindManyOptions } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -36,6 +37,7 @@ export class UserController
     return this.userService.create(dto);
   }
 
+  @ApiBody({ type: UpdateUserDto, description: 'UpdateUserDto description' })
   @Put(':id')
   update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
     return this.userService.update(id, dto);
