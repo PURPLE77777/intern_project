@@ -1,1 +1,1 @@
-export * from './baseCRUD.interface';
+export * from './baseCRUDController.interface';

@@ -2,7 +2,7 @@ export enum ReportCategory {
   Violence = 'violence',
   Hate = 'hate',
   Scam = 'scam',
-  Fake = 'Fake',
+  Fake = 'fake',
   Sexual = 'sexual',
   SelfInjury = 'self-injury',
 }

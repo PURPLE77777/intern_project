@@ -9,16 +9,17 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiBody } from '@nestjs/swagger';
-import { IBaseCRUD } from 'share/interfaces';
+import { Routes } from 'share/consts';
+import { IBaseCRUDController } from 'share/interfaces';
 import { FindManyOptions } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
-@Controller('user')
+@Controller(Routes.Users)
 export class UserController
-  implements IBaseCRUD<User, CreateUserDto, UpdateUserDto>
+  implements IBaseCRUDController<User, CreateUserDto, UpdateUserDto>
 {
   constructor(private readonly userService: UserService) {}
 

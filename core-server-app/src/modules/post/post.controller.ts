@@ -9,16 +9,16 @@ import {
   Query,
 } from '@nestjs/common';
 import { Routes } from 'share/consts';
-import { IBaseCRUD } from 'share/interfaces';
+import { IBaseCRUDController } from 'share/interfaces';
 import { FindManyOptions } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { Post as PostEntity } from './post.entity';
 import { PostService } from './post.service';
 
-@Controller(Routes.Post)
+@Controller(Routes.Posts)
 export class PostController
-  implements IBaseCRUD<PostEntity, CreatePostDto, UpdatePostDto>
+  implements IBaseCRUDController<PostEntity, CreatePostDto, UpdatePostDto>
 {
   constructor(private readonly postService: PostService) {}
 

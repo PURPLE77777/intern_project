@@ -10,7 +10,7 @@ import { Routes } from 'share/consts';
 import { CreateFileDto } from './dto/create-file.dto';
 import { FileService } from './file.service';
 
-@Controller(Routes.File)
+@Controller(Routes.Files)
 export class FileController {
   constructor(private readonly fileService: FileService) {}
 

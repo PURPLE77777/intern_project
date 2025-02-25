@@ -15,7 +15,7 @@ import { ChatService } from './chat.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { UpdateChatDto } from './dto/update-chat.dto';
 
-@Controller(Routes.Chat)
+@Controller(Routes.Chats)
 export class ChatController {
   constructor(private readonly chatService: ChatService) {}
 

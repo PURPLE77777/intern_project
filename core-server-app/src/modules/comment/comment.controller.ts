@@ -1,19 +1,20 @@
 import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { Routes } from 'share/consts';
-import { IBaseCRUD } from 'share/interfaces';
-import { FindManyOptions } from 'typeorm';
+import { IBaseCRUDController } from 'share/interfaces';
 import { Comment } from './comment.entity';
 import { CommentService } from './comment.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
+import { GetAllCommentsDto } from './dto/getAll-comments.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 
-@Controller(Routes.Comment)
+@Controller(Routes.Comments)
 export class CommentController
-  implements IBaseCRUD<Comment, CreateCommentDto, UpdateCommentDto>
+  implements IBaseCRUDController<Comment, CreateCommentDto, UpdateCommentDto>
 {
   constructor(private readonly commentService: CommentService) {}
+
   @Get()
-  getAll(@Query() query: FindManyOptions<Comment>) {
+  getAll(@Query() query: GetAllCommentsDto) {
     return this.commentService.findAll(query);
   }
 

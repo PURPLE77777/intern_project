@@ -9,16 +9,16 @@ import {
   Query,
 } from '@nestjs/common';
 import { Routes } from 'share/consts';
-import { IBaseCRUD } from 'share/interfaces';
+import { IBaseCRUDController } from 'share/interfaces';
 import { FindManyOptions } from 'typeorm';
 import { CreateLikeDto } from './dto/create-like.dto';
 import { UpdateLikeDto } from './dto/update-like.dto';
 import { Like } from './like.entity';
 import { LikeService } from './like.service';
 
-@Controller(Routes.Like)
+@Controller(Routes.Likes)
 export class LikeController
-  implements IBaseCRUD<Like, CreateLikeDto, UpdateLikeDto>
+  implements IBaseCRUDController<Like, CreateLikeDto, UpdateLikeDto>
 {
   constructor(private readonly likeService: LikeService) {}
 
