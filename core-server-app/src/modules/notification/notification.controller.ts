@@ -1,16 +1,29 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { Routes } from 'share/consts';
-import { IBaseCRUD } from 'share/interfaces';
+import { IBaseCRUDController } from 'share/interfaces';
 import { FindManyOptions } from 'typeorm';
 import { CreateNotificationDto } from './dto/create-notification.dto';
 import { UpdateNotificationDto } from './dto/update-notification.dto';
 import { Notification } from './notification.entity';
 import { NotificationService } from './notification.service';
 
-@Controller(Routes.Notification)
+@Controller(Routes.Notifications)
 export class NotificationController
   implements
-    IBaseCRUD<Notification, CreateNotificationDto, UpdateNotificationDto>
+    IBaseCRUDController<
+      Notification,
+      CreateNotificationDto,
+      UpdateNotificationDto
+    >
 {
   constructor(private readonly notificationService: NotificationService) {}
 

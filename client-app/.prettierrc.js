@@ -12,4 +12,22 @@ module.exports = {
   endOfLine: 'auto',
   importOrderSeparation: true,
   importOrderSortSpecifiers: true,
+  importOrder: [
+    '<THIRD_PARTY_MODULES>',
+    '^@app/(.*)$',
+    '^@entities/(.*)$',
+    '^@features/(.*)$',
+    '^@pages/(.*)$',
+    '^@shared/(.*)$',
+    '^@widgets/(.*)$',
+    '^../(.*)$',
+    '^./(.*)$',
+  ],
+  plugins: [
+    '@trivago/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
+  ],
+  tailwindFunctions: ['clsx'],
+  tailwindPreserveWhitespace: false,
+  tailwindPreserveDuplicates: false,
 };

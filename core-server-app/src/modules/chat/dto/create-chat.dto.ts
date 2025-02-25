@@ -1,11 +1,10 @@
-import { IsUUID, MinLength } from 'class-validator';
+import { ArrayNotEmpty, IsArray, IsUUID } from 'class-validator';
 import { OmitProperties } from 'share/lib';
 import { Chat } from '../chat.entity';
 
 export class CreateChatDto extends OmitProperties(Chat) {
-  @IsUUID('all', {
-    each: true,
-  })
-  @MinLength(1)
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsUUID('all', { each: true })
   profileIds: string[];
 }

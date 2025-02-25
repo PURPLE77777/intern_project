@@ -9,16 +9,16 @@ import {
   Query,
 } from '@nestjs/common';
 import { Routes } from 'share/consts';
-import { IBaseCRUD } from 'share/interfaces';
+import { IBaseCRUDController } from 'share/interfaces';
 import { FindManyOptions } from 'typeorm';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { Profile } from './profile.entity';
 import { ProfileService } from './profile.service';
 
-@Controller(Routes.Profile)
+@Controller(Routes.Profiles)
 export class ProfileController
-  implements IBaseCRUD<Profile, CreateProfileDto, UpdateProfileDto>
+  implements IBaseCRUDController<Profile, CreateProfileDto, UpdateProfileDto>
 {
   constructor(private readonly profileService: ProfileService) {}
 

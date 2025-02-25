@@ -1,0 +1,4 @@
+.common {
+  --homePhones: url(../../assets/images/home-phones.png);
+  --loginLogo: url(../../assets/images/login-logo.png);
+}

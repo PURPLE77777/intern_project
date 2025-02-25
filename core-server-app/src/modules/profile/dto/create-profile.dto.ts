@@ -34,6 +34,7 @@ export class CreateProfileDto extends OmitProperties(Profile) {
   @IsString()
   username: string;
 
+  @IsOptional()
   @IsBoolean()
   isBlocked?: boolean;
 }

@@ -3,7 +3,6 @@ import { VerifyTokenDto } from 'dto/verify-token.dto';
 import { Request, Response } from 'express';
 import redisService, { RedisService } from 'services/redis.service';
 import tokenService, { TokenService } from 'services/token.service';
-import { CacheData } from 'share/const';
 
 class TokenController {
   constructor(
@@ -12,7 +11,6 @@ class TokenController {
   ) {}
 
   async create(req: Request, res: Response) {
-    // signIn
     const dto: CreateTokenDto = req.body;
 
     const accessToken = this.tokenService.create(dto, { expiresIn: '10m' });
@@ -22,16 +20,10 @@ class TokenController {
     res.json({ accessToken, refreshToken });
   }
 
-  // logout
-
-  // refreshTokens
-
-  // verifyAccess
-
   async verifyToken(req: Request, res: Response) {
-    const { token }: VerifyTokenDto = req.body;
+    const { token, profileId }: VerifyTokenDto = req.body;
 
-    const savedToken = await redisService.get(CacheData);
+    const savedToken = await redisService.get(profileId);
 
     if (token === savedToken && this.tokenService.verify(token)) {
       res.send(this.tokenService.verify(token));

@@ -1,13 +1,16 @@
 import jwt, { SignOptions } from 'jsonwebtoken';
 import { PayloadType } from 'share/types/payload.type';
+import configService, { ConfigService } from './config.service';
 
 export class TokenService {
-  private readonly SECRET_KEY = 'SECRET';
+  private SECRET_KEY: string;
 
   private readonly jwt: typeof jwt;
 
-  constructor() {
+  constructor(configService: ConfigService) {
     this.jwt = jwt;
+
+    this.SECRET_KEY = configService.get('SECRET_KEY');
   }
 
   create(payload: PayloadType, options: SignOptions) {
@@ -19,4 +22,4 @@ export class TokenService {
   }
 }
 
-export default new TokenService();
+export default new TokenService(configService);

@@ -1,0 +1,38 @@
+[data-theme='dark'] {
+  --color-primary: #1877f2;
+  --color-onPrimary: #fff;
+
+  --color-secondary: #dfdfdf;
+  --color-onSecondary: #000;
+
+  --color-tertiary: #a55d6f;
+  --color-onTertiary: #ffffff;
+
+  --color-error: #dc3545;
+  --color-onError: #dc3545;
+  --color-errorContainer: #ff5733;
+  --color-onErrorContainer: #ffe4de;
+
+  --color-surface: #161722;
+  --color-onSurface: #fff;
+
+  --color-surfaceVariant: #4a5568;
+  --color-onSurfaceVariant: #ffffff;
+
+  --color-surfaceDisabled: #717171;
+  --color-onSurfaceDisabled: #717171;
+
+  --color-inverseSurface: #000000;
+  --color-inverseOnSurface: #717171;
+
+  --color-surfaceContainerLowest: #141517;
+  --color-surfaceContainerLow: #202126;
+  --color-surfaceContainer: #000;
+  --color-surfaceContainerHigh: #4b4f57;
+  --color-surfaceContainerHighest: #565b66;
+
+  --color-outline: #363636;
+  --color-outlineVariant: #000000;
+
+  /* --homePhones: url(../../assets/images/home-phones.png); */
+}

@@ -4,8 +4,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { HashService } from 'modules/hash/hash.service';
 import { BaseCRUDService } from 'share/base';
+import { encrypt } from 'share/lib';
 import { Repository } from 'typeorm';
 import { UserErrorMessages } from './const';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -21,8 +21,7 @@ export class UserService extends BaseCRUDService<
 > {
   constructor(
     @Inject(USER_REPOSITORY_TOKEN)
-    private readonly userRepository: Repository<User>,
-    private readonly hashService: HashService
+    private readonly userRepository: Repository<User>
   ) {
     super(userRepository);
   }
@@ -38,7 +37,7 @@ export class UserService extends BaseCRUDService<
       throw new BadRequestException(UserErrorMessages.UserExists);
     }
 
-    dto.password = await this.hashService.encrypt(password);
+    dto.password = await encrypt(password);
 
     return super.create(dto);
   }
